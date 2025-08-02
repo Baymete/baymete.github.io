@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bora Aymete - Music Producer</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font 'Inter' for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for a dark, atmospheric feel */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d10;
+            color: #e2e8f0;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: #1a1a21;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .audio-player {
+            width: 100%;
+            background-color: #2a2a30;
+            border-radius: 9999px; /* Fully rounded corners */
+        }
+        
+        /* CSS for the fade-in animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animate-fade-in-slow {
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+            opacity: 0; /* Initially hidden */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="py-6 sticky top-0 z-50 backdrop-blur-sm bg-black/30">
+        <div class="container flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-gradient"></a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+                <a href="#music" class="hover:text-blue-400 transition-colors">Music</a>
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-2xl focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu (hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-black bg-opacity-90">
+        <div class="flex justify-end p-4">
+            <button id="close-mobile-menu" class="text-white text-3xl">&times;</button>
+        </div>
+        <nav class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+            <a href="#home" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Home</a>
+            <a href="#music" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Music</a>
+            <a href="#about" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">About</a>
+            <a href="#contact" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Contact</a>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[80vh] flex flex-col justify-center items-center text-center p-8 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/0d0d10/444444?text=Bora+Aymete');">
+            <!-- <h1 class="text-6xl md:text-8xl font-extrabold mb-4 animate-fade-in text-shadow-lg">Bora Aymete</h1> -->
+            <p class="text-xl md:text-2xl font-light mb-8 animate-fade-in-slow max-w-2xl">Crafting futuristic soundscapes and powerful rhythms for artists worldwide.</p>
+            <a href="#music" class="px-8 py-3 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-black font-semibold text-lg hover:from-blue-500 hover:to-green-400 transition-all duration-300 transform hover:scale-105">Listen Now</a>
+        </section>
+
+        <!-- Music Section -->
+        <section id="music" class="py-20">
+            <div class="container">
+                <h2 class="text-5xl font-bold text-center mb-16 text-gradient">Works</h2>
+                
+                <!-- Carousel Container -->
+                <div class="relative">
+                    <!-- Video Grid -->
+                    <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                        <!-- YouTube videos will be loaded here -->
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 bg-black/50 hover:bg-black/75 text-white rounded-full p-3 hidden md:block">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 bg-black/50 hover:bg-black/75 text-white rounded-full p-3 hidden md:block">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    <!-- Pagination Dots -->
+                    <div id="pagination-dots" class="flex justify-center space-x-2 mt-8">
+                        <!-- Dots will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-900">
+            <div class="container flex flex-col md:flex-row items-center gap-10">
+                <div class="w-full md:w-1/2">
+                    <!-- IMPORTANT: Replace src with a link to your high-resolution profile photo -->
+                    <img src="https://placehold.co/800x800/1a1a21/6b7280?text=Your+Photo" alt="Bora Aymete's Photo" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <h2 class="text-5xl font-bold mb-6 text-gradient">About Bora Aymete</h2>
+                    <!-- IMPORTANT: Replace the placeholder text with your actual bio -->
+                    <p class="text-lg text-gray-300 leading-relaxed mb-4">
+                        Bora Aymete is a visionary music producer pushing the boundaries of electronic and experimental music.
+                        With a deep passion for sound design and a meticulous ear for detail, he creates immersive
+                        sonic worlds that transport listeners to new dimensions.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Based in the city of echoes and future beats, Bora Aymete has collaborated with a diverse
+                        range of artists, leaving his signature touch on numerous chart-topping tracks and independent
+                        projects. His work is a testament to the power of sound as a storytelling medium.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container text-center">
+                <h2 class="text-5xl font-bold mb-6 text-gradient">Get In Touch</h2>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                    For collaborations, bookings, or inquiries, feel free to reach out. I'm always looking to connect with new artists and push creative boundaries.
+                </p>
+                <div class="flex justify-center space-x-6 text-3xl">
+                    <!-- IMPORTANT: Replace href with your email address -->
+                    <a href="mailto:bora@aymete.com" class="hover:text-blue-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4.7L12 13 4 8.7V6l8 4.3L20 6v2.7z"/>
+                        </svg>
+                    </a>
+                    <!-- IMPORTANT: Replace href with your SoundCloud profile URL -->
+                    <a href="https://soundcloud.com/bora-aymete" target="_blank" class="hover:text-blue-400 transition-colors">
+                        <!-- License: Apache. Made by lawnchairlauncher: https://github.com/lawnchairlauncher/lawnicons -->
+                        <svg class="h-8 w-8" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M14 95v28m24-41v48m24-57v58"/><path fill="#000000" d="M86 131h-6a6 6 0 0 0 6 6v-6Zm61.964-37.303-5.995-.257a6.001 6.001 0 0 0 9.01 5.444l-3.015-5.187ZM86 60.5l-3.542-4.843A6 6 0 0 0 80 60.5h6Zm23 64.5H86v12h23v-12Zm49 0h-49v12h49v-12Zm14-14c0 7.732-6.268 14-14 14v12c14.359 0 26-11.641 26-26h-12Zm-14-14c7.732 0 14 6.268 14 14h12c0-14.36-11.641-26-26-26v12Zm-7.021 1.884A13.91 13.91 0 0 1 158 97V85c-4.745 0-9.21 1.277-13.051 3.51l6.03 10.374ZM142 92c0 .483-.01.963-.031 1.44l11.989.513c.028-.648.042-1.299.042-1.953h-12Zm-33-33c18.225 0 33 14.775 33 33h12c0-24.853-20.147-45-45-45v12Zm-19.458 6.344A32.825 32.825 0 0 1 109 59V47c-9.917 0-19.1 3.215-26.542 8.658l7.084 9.686ZM80 60.5V131h12V60.5H80Z"/></svg>                    
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-6 text-center">
+        <div class="container">
+            <p>&copy; 2025 Bora Aymete. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // function closeMobileMenu() {
+        //     mobileMenu.classList.add('hidden');
+        // }
+
+        // Sample YouTube video IDs - Replace with your actual video IDs
+        const videos = [
+            'rrwfCK9YGuY',
+            '3yDN9fAcJQ4',
+            'q1I-GxthNy4'
+    ];
+
+        const videosPerPage = 4;
+        let currentPage = 0;
+        const totalPages = Math.ceil(videos.length / videosPerPage);
+
+        function createVideoEmbed(videoId) {
+            return `
+                <div class="card p-4 aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/${videoId}?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>`;
+        }
+
+        function updatePaginationDots() {
+            const dotsContainer = document.getElementById('pagination-dots');
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('button');
+                dot.className = `h-3 w-3 rounded-full transition-colors ${i === currentPage ? 'bg-blue-500' : 'bg-gray-400'}`;
+                dot.onclick = () => showPage(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function showPage(pageNum) {
+            currentPage = pageNum;
+            const start = pageNum * videosPerPage;
+            const end = start + videosPerPage;
+            const pageVideos = videos.slice(start, end);
+            
+            const grid = document.getElementById('video-grid');
+            grid.innerHTML = pageVideos.map(videoId => createVideoEmbed(videoId)).join('');
+            
+            updatePaginationDots();
+        }
+
+        // Event listeners for navigation buttons
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentPage > 0) showPage(currentPage - 1);
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentPage < totalPages - 1) showPage(currentPage + 1);
+        });
+
+        // Initialize the first page
+        showPage(0);
+    </script>
+</body>
+</html>
