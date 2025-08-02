@@ -83,10 +83,10 @@
             <button id="close-mobile-menu" class="text-white text-3xl">&times;</button>
         </div>
         <nav class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-            <a href="#home" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Home</a>
-            <a href="#music" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Music</a>
-            <a href="#about" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">About</a>
-            <a href="#contact" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenu()">Contact</a>
+            <a href="#home" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenuFunc()">Home</a>
+            <a href="#music" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenuFunc()">Music</a>
+            <a href="#about" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenuFunc()">About</a>
+            <a href="#contact" class="text-white hover:text-blue-400 transition-colors" onclick="closeMobileMenuFunc()">Contact</a>
         </nav>
     </div>
 
@@ -229,9 +229,9 @@ L181.722,197.269z"/>
             mobileMenu.classList.add('hidden');
         });
 
-        // function closeMobileMenu() {
-        //     mobileMenu.classList.add('hidden');
-        // }
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.add('hidden');
+        }
 
         // Sample YouTube video IDs - Replace with your actual video IDs
         const videos = [
